@@ -1,0 +1,280 @@
+import 'dart:developer';
+import 'package:edvoc_elearning/Core/colors.dart';
+import 'package:edvoc_elearning/Core/constants.dart';
+import 'package:edvoc_elearning/Core/style.dart';
+import 'package:flutter/material.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+
+class ScreenCourseDetails extends StatefulWidget {
+  final String courseName;
+  final String courseDescription;
+  final double coursePrice;
+  final int ratingAmount;
+  final String courseType;
+  final String date;
+  const ScreenCourseDetails(
+      {super.key,
+      required this.courseName,
+      required this.courseDescription,
+      required this.coursePrice,
+      required this.courseType,
+      required this.date,
+      required this.ratingAmount});
+
+  @override
+  State<ScreenCourseDetails> createState() => _ScreenCourseDetailsState();
+}
+
+class _ScreenCourseDetailsState extends State<ScreenCourseDetails> {
+  late YoutubePlayerController _controller;
+  late String currentVideoId;
+  var value = 0.0;
+  late double hieght;
+  late bool isFullScreen = false;
+
+  @override
+  void initState() {
+    super.initState();
+    hieght = 250;
+
+    currentVideoId = "tg1W06WFt0Y";
+
+    _controller = YoutubePlayerController.fromVideoId(
+      videoId: currentVideoId,
+      params: const YoutubePlayerParams(
+          mute: false,
+          showControls: true,
+          showFullscreenButton: true,
+          pointerEvents: PointerEvents.auto,
+          showVideoAnnotations: false,
+          enableJavaScript: false,
+          enableKeyboard: true,
+          strictRelatedVideos: true,
+          loop: true),
+    );
+
+    _controller.setFullScreenListener(
+      (isFullScreen) {
+        log('${isFullScreen ? 'Entered' : 'Exited'} Fullscreen.');
+        isFullScreen ? isFullScreen == true : false;
+      },
+    );
+
+    _controller.listen((state) {
+      log('Player state: $state');
+    });
+  }
+
+  void changeVideoId(String videoId) {
+    setState(() {
+      currentVideoId = videoId;
+    });
+    _controller.loadVideoById(videoId: videoId);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final deviceHeight = MediaQuery.of(context).size.height;
+    final deviceWidth = MediaQuery.of(context).size.width;
+    return Scaffold(
+      body: Container(
+        height: deviceHeight - 60,
+        width: deviceWidth,
+        decoration: const BoxDecoration(gradient: backgroundColor),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              kHieght50,
+              Container(
+                width: deviceWidth - (deviceWidth * 0.3),
+                // height: ,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(15)),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: AbsorbPointer(
+                    absorbing: true,
+                    child: YoutubePlayer(
+                      controller: _controller,
+                      aspectRatio: 16 / 9,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                height: 300,
+                width: deviceWidth - (deviceWidth * 0.3),
+                decoration: BoxDecoration(gradient: whiteToBlue),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            widget.courseName,
+                            style: t23SemiBoldshadeBlack,
+                          ),
+                          Row(
+                            children: [
+                              Row(
+                                children: [
+                                  const Icon(Icons.error_outline_outlined,
+                                      color: greyColor),
+                                  Text("Last Updated 01/2024",
+                                      style: t11MediumGreyColor),
+                                ],
+                              ),
+                              kWidth10,
+                              Row(
+                                children: [
+                                  const Icon(Icons.language, color: greyColor),
+                                  Text("Malayalam", style: t11MediumGreyColor),
+                                ],
+                              ),
+                              kWidth10,
+                              Row(
+                                children: [
+                                  const Icon(Icons.closed_caption_off,
+                                      color: greyColor),
+                                  Text("English", style: t11MediumGreyColor)
+                                ],
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      kHieght20,
+                      SizedBox(
+                        width: (deviceWidth - (deviceWidth * 0.3)) * 0.6,
+                        child: Text(
+                          widget.courseDescription,
+                          style: t15MediumBlack,
+                        ),
+                      ),
+                      kHieght20,
+                      Text(
+                        "INR ${widget.coursePrice.toStringAsFixed(2)}",
+                        style: t15SemiBoldBlack,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 100,
+              ),
+              // SizedBox(
+              //   width: deviceWidth - (deviceWidth * 0.3),
+              //   child: YoutubePlayerControllerProvider(
+              //       controller: _controller,
+              //       child: Builder(builder: (context) {
+              //         print(
+              //             "value is ${context.ytController.metadata.duration.inSeconds}");
+              //         return Column(
+              //           children: [
+              //             Row(
+              //               children: [
+              //                 IconButton(
+              //                     onPressed: () {
+              //                       context.ytController.mute();
+              //                     },
+              //                     icon: const Icon(Icons.volume_off)),
+              //                 IconButton(
+              //                     onPressed: () {
+              //                       context.ytController.unMute();
+              //                     },
+              //                     icon: const Icon(Icons.volume_up_outlined)),
+              //                 YoutubeValueBuilder(
+              //                   builder: (context, value) {
+              //                     return IconButton(
+              //                       icon: Icon(
+              //                         value.playerState == PlayerState.playing
+              //                             ? Icons.pause
+              //                             : Icons.play_arrow,
+              //                       ),
+              //                       onPressed: () {
+              //                         value.playerState == PlayerState.playing
+              //                             ? context.ytController.pauseVideo()
+              //                             : context.ytController.playVideo();
+              //                       },
+              //                     );
+              //                   },
+              //                 ),
+              //                 IconButton(
+              //                     onPressed: () {
+              //                       setState(() {
+              //                         changeVideoId("HVWn3uVA0Po");
+              //                       });
+              //                     },
+              //                     icon: const Icon(Icons.next_plan)),
+              //               ],
+              //             ),
+              //             Row(
+              //               children: [
+              //                 const Text(
+              //                   'Seek',
+              //                   style: TextStyle(fontWeight: FontWeight.w300),
+              //                 ),
+              //                 const SizedBox(width: 14),
+              //                 Expanded(
+              //                   child: StreamBuilder<YoutubeVideoState>(
+              //                     stream: context.ytController.videoStateStream,
+              //                     initialData: const YoutubeVideoState(),
+              //                     builder: (context, snapshot) {
+              //                       final position =
+              //                           snapshot.data?.position.inSeconds ?? 0;
+
+              //                       final lenght =
+              //                           context.ytController.duration;
+              //                       final duration = context.ytController
+              //                           .metadata.duration.inSeconds;
+
+              //                       value = position == 0 || duration == 0
+              //                           ? 0
+              //                           : position / duration;
+
+              //                       return StatefulBuilder(
+              //                         builder: (context, setState) {
+              //                           print("position is $position ");
+              //                           print("duration is $duration ");
+              //                           return Slider(
+              //                             value: value,
+              //                             onChanged: (positionFraction) {
+              //                               value = positionFraction;
+              //                               setState(() {});
+
+              //                               context.ytController.seekTo(
+              //                                 seconds:
+              //                                     (value * duration).toDouble(),
+              //                                 allowSeekAhead: true,
+              //                               );
+              //                             },
+              //                             min: 0,
+              //                             max: 1,
+              //                           );
+              //                         },
+              //                       );
+              //                     },
+              //                   ),
+              //                 ),
+              //               ],
+              //             )
+              //           ],
+              //         );
+              //       })),
+              // ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
