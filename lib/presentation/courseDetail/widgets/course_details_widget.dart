@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edvoc_elearning/Core/colors.dart';
 import 'package:edvoc_elearning/Core/constants.dart';
 import 'package:edvoc_elearning/Core/style.dart';
 import 'package:edvoc_elearning/Widgets/custom_elevated_buy_now_button.dart';
 import 'package:edvoc_elearning/model/question.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CourseDetailsWidget extends StatelessWidget {
   const CourseDetailsWidget({
@@ -12,15 +14,23 @@ class CourseDetailsWidget extends StatelessWidget {
     required this.courseName,
     required this.courseDescription,
     required this.course,
+    required this.lastUpdated,
   });
 
   final double deviceWidth;
   final String courseName;
   final String courseDescription;
   final Course course;
+  final Timestamp lastUpdated;
 
   @override
   Widget build(BuildContext context) {
+    // Convert Timestamp to DateTime
+    DateTime dateTime = lastUpdated.toDate();
+
+// Format DateTime into "DD/MM/YYYY" format
+    String formattedDate = DateFormat('dd/MM/yyyy').format(dateTime);
+
     return Container(
       height: 300,
       width: deviceWidth - (deviceWidth * 0.3),
@@ -32,7 +42,7 @@ class CourseDetailsWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
-              height: 30,
+              height: 50,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,7 +57,7 @@ class CourseDetailsWidget extends StatelessWidget {
                       children: [
                         const Icon(Icons.error_outline_outlined,
                             color: greyColor),
-                        Text("Last Updated 01/2024",
+                        Text("Last Updated ${formattedDate}",
                             style: t11MediumGreyColor),
                       ],
                     ),
@@ -61,8 +71,7 @@ class CourseDetailsWidget extends StatelessWidget {
                     kWidth10,
                     Row(
                       children: [
-                        const Icon(Icons.closed_caption_off,
-                            color: greyColor),
+                        const Icon(Icons.closed_caption_off, color: greyColor),
                         Text("English", style: t11MediumGreyColor)
                       ],
                     ),

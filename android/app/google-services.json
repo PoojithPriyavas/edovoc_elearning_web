@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "777943477277",
+    "firebase_url": "https://edvoc-elearning-default-rtdb.firebaseio.com",
+    "project_id": "edvoc-elearning",
+    "storage_bucket": "edvoc-elearning.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777943477277:android:b9e7e943e85020eacaaaf4",
+        "android_client_info": {
+          "package_name": "com.example.edvoc_elearning"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0mpGRQcQA8FK5s7qlxsvca9gYDfuKdH8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

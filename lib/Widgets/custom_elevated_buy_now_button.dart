@@ -16,6 +16,7 @@ class CustomElevatedBuyNowButton extends StatelessWidget {
           style: const ButtonStyle(
             surfaceTintColor: MaterialStatePropertyAll(whiteColor),
             backgroundColor: MaterialStatePropertyAll(whiteColor),
+            overlayColor: MaterialStatePropertyAll(whiteColor),
             shape: MaterialStatePropertyAll(
               ContinuousRectangleBorder(
                 side: BorderSide(color: redColor),

@@ -7,6 +7,11 @@ TextStyle get t7RegularLightGrey {
       fontSize: 7, fontWeight: FontWeight.w400, color: lightGreyColor);
 }
 
+TextStyle get t7RegularDarkGrey {
+  return GoogleFonts.poppins(
+      fontSize: 7, fontWeight: FontWeight.w400, color: darkGreyColor);
+}
+
 TextStyle get t8MediumGrey {
   return GoogleFonts.poppins(
       fontSize: 8, fontWeight: FontWeight.w500, color: greyColor);
@@ -39,7 +44,7 @@ TextStyle get t10SemiBoldlightGrey {
 
 TextStyle get t10SemiBoldGrey {
   return GoogleFonts.poppins(
-      fontSize: 10, fontWeight: FontWeight.w500, color: greyColor);
+      fontSize: 10, fontWeight: FontWeight.w500, color: darkGreyColor);
 }
 
 TextStyle get t11MediumGreyColor {
@@ -152,6 +157,11 @@ TextStyle get t15SemiBoldDarkBlue {
       fontSize: 15, fontWeight: FontWeight.w700, color: darkBlue);
 }
 
+TextStyle get t18MediumBlack {
+  return GoogleFonts.poppins(
+      fontSize: 18, fontWeight: FontWeight.w500, color: blackColor);
+}
+
 TextStyle get t18RegularWhite {
   return GoogleFonts.poppins(
       fontSize: 18, fontWeight: FontWeight.w400, color: whiteColor);
@@ -175,6 +185,11 @@ TextStyle get t20SemiBoldBlack {
 TextStyle get t20MediumRed {
   return GoogleFonts.poppins(
       fontSize: 20, fontWeight: FontWeight.w500, color: blackColor);
+}
+
+TextStyle get t22SemiBoldBlack {
+  return GoogleFonts.poppins(
+      fontSize: 22, fontWeight: FontWeight.w700, color: Colors.black);
 }
 
 TextStyle get t23SemiBoldshadeBlack {

@@ -1,7 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edvoc_elearning/Core/colors.dart';
 import 'package:edvoc_elearning/Core/constants.dart';
 import 'package:edvoc_elearning/Core/style.dart';
-import 'package:edvoc_elearning/Ui/courseDetail/screen_course_detail.dart';
+import 'package:edvoc_elearning/presentation/courseDetail/screen_course_detail.dart';
 import 'package:edvoc_elearning/Widgets/custom_small_elevated_button.dart';
 import 'package:flutter/material.dart';
 
@@ -11,15 +12,27 @@ class FeaturedCoursesCard extends StatefulWidget {
   final double coursePrice;
   final int ratingAmount;
   final String courseType;
-  final String date;
+  final String duration;
+  final String courseLevel;
+  final Timestamp courseLastUpdated;
+  final double averageRating;
+  final int studentCount;
+  final int favouriteCount;
+  final int courseId;
   const FeaturedCoursesCard(
       {super.key,
       required this.courseName,
       required this.courseDescription,
       required this.coursePrice,
       required this.courseType,
-      required this.date,
-      required this.ratingAmount});
+      required this.duration,
+      required this.courseLevel,
+      required this.ratingAmount,
+      required this.averageRating,
+      required this.studentCount,
+      required this.favouriteCount,
+      required this.courseId,
+      required this.courseLastUpdated});
 
   @override
   State<FeaturedCoursesCard> createState() => _FeaturedCoursesCardState();
@@ -72,17 +85,21 @@ class _FeaturedCoursesCardState extends State<FeaturedCoursesCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 21),
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => ScreenCourseDetails(
-                courseIndex: 0,
+                averageRating: widget.averageRating,
+                favouriteCount: widget.favouriteCount,
+                studentCount: widget.studentCount,
+                lastUpdated: widget.courseLastUpdated,
+                courseIndex: widget.courseId,
                 courseName: widget.courseName,
                 courseDescription: widget.courseDescription,
                 coursePrice: widget.coursePrice,
                 courseType: widget.courseType,
-                date: widget.date,
+                date: widget.duration,
                 ratingAmount: widget.ratingAmount),
           ));
         },
@@ -155,7 +172,7 @@ class _FeaturedCoursesCardState extends State<FeaturedCoursesCard> {
                           kWidth5,
                           Text(
                             // "3hr:45min",
-                            "${widget.date}hr:40min",
+                            "${widget.duration}hr:00min",
                             style: t8MediumGrey,
                           )
                         ],
@@ -188,18 +205,33 @@ class _FeaturedCoursesCardState extends State<FeaturedCoursesCard> {
                         children: [
                           Text(
                             // "INR 899.00",
-                            "INR ${widget.coursePrice}",
+                            "INR ${widget.coursePrice.toStringAsFixed(2)}",
                             style: t10SemiBoldGrey,
                           ),
                           Text(
-                            "Intermediate Course",
-                            style: t7RegularLightGrey,
+                            widget.courseLevel,
+                            style: t7RegularDarkGrey,
                           )
                         ],
                       ),
                       CustomSmallElevatedButton(
                           label: "Learn More",
-                          callbackAction: () {},
+                          callbackAction: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ScreenCourseDetails(
+                                  averageRating: widget.averageRating,
+                                  favouriteCount: widget.favouriteCount,
+                                  studentCount: widget.studentCount,
+                                  lastUpdated: widget.courseLastUpdated,
+                                  courseIndex: widget.courseId,
+                                  courseName: widget.courseName,
+                                  courseDescription: widget.courseDescription,
+                                  coursePrice: widget.coursePrice,
+                                  courseType: widget.courseType,
+                                  date: widget.duration,
+                                  ratingAmount: widget.ratingAmount),
+                            ));
+                          },
                           height: 20,
                           width: 70,
                           textStyle: t10MediumWhite),

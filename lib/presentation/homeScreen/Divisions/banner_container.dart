@@ -1,29 +1,28 @@
 import 'package:edvoc_elearning/Core/colors.dart';
 import 'package:edvoc_elearning/Core/constants.dart';
 import 'package:edvoc_elearning/Core/style.dart';
-import 'package:edvoc_elearning/Ui/homeScreen/Tabview/home.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class BannerContainer extends StatelessWidget {
   const BannerContainer({
     super.key,
-    required this.widget,
+    required this.deviceWidth,
   });
 
-  final Home widget;
+  final double deviceWidth;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 410,
-      width: widget.deviceWidth,
+      width: deviceWidth,
       decoration: const BoxDecoration(gradient: shadeToDarkColor),
       child: Stack(
         children: [
           Positioned(
             bottom: 0,
-            right: 100 ,
+            right: 100,
             child: SizedBox(
               width: 500,
               child: Column(

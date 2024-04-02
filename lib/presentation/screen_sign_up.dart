@@ -1,7 +1,7 @@
 import 'package:edvoc_elearning/Core/colors.dart';
 import 'package:edvoc_elearning/Core/constants.dart';
 import 'package:edvoc_elearning/Core/style.dart';
-import 'package:edvoc_elearning/Ui/screen_sign_in.dart';
+import 'package:edvoc_elearning/presentation/screen_sign_in.dart';
 import 'package:edvoc_elearning/Widgets/custom_elevated_button.dart';
 import 'package:edvoc_elearning/Widgets/custom_text_filed.dart';
 import 'package:flutter/cupertino.dart';

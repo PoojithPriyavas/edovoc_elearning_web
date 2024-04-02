@@ -1,11 +1,11 @@
 import 'package:edvoc_elearning/Core/style.dart';
-import 'package:edvoc_elearning/Ui/screen_home_dekstop.dart';
+import 'package:edvoc_elearning/presentation/okok.dart';
+import 'package:edvoc_elearning/presentation/screen_home_dekstop.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class ScreenHome extends StatefulWidget {
-  const 
-  ScreenHome({super.key});
+  const ScreenHome({super.key});
 
   @override
   State<ScreenHome> createState() => _ScreenHomeState();
@@ -43,16 +43,12 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
     final deviceWidth = MediaQuery.of(context).size.width;
 
     return ScreenTypeLayout.builder(
-      desktop: (p0) => ScreenHomeDesktop(
-          deviceHeight: deviceHeight,
-          deviceWidth: deviceWidth,
-          controller: _controller,
-          tabViewChildren: _tabViewChildren),
-      tablet: (p0) => Container(
-        height: 150,
-        width: 250,
-        color: Colors.amber,
-      ),
-    );
+        desktop: (p0) => ScreenHomeDesktop(
+            deviceHeight: deviceHeight,
+            deviceWidth: deviceWidth,
+            controller: _controller,
+            tabViewChildren: _tabViewChildren),
+        // desktop: (p0) => VideoApp(),
+        tablet: (p0) => VideoApp());
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edvoc_elearning/Core/colors.dart';
 import 'package:edvoc_elearning/Core/style.dart';
 import 'package:edvoc_elearning/Widgets/custom_courses_card_widget.dart';
@@ -49,18 +50,32 @@ class Courses extends StatelessWidget {
                 spacing: 30,
                 children: [
                   FeaturedCoursesCard(
+                      courseId: 1,
+                      averageRating: 322,
+                      favouriteCount: 23,
+                      studentCount: 23,
+                      courseLastUpdated:
+                          Timestamp(DateTime.april, DateTime.daysPerWeek),
                       courseName: courseName,
                       courseDescription: courseDescription,
                       coursePrice: coursePrice,
                       courseType: courseType,
-                      date: date,
+                      duration: date,
+                      courseLevel: "",
                       ratingAmount: ratingAmount),
                   FeaturedCoursesCard(
+                      courseId: 1,
+                      averageRating: 322,
+                      favouriteCount: 23,
+                      studentCount: 23,
+                      courseLastUpdated:
+                          Timestamp(DateTime.april, DateTime.daysPerWeek),
                       courseName: courseName,
                       courseDescription: courseDescription,
                       coursePrice: coursePrice,
                       courseType: courseType,
-                      date: date,
+                      duration: date,
+                      courseLevel: "",
                       ratingAmount: ratingAmount),
                 ],
               ),

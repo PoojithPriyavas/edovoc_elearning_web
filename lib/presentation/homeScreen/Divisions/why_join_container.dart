@@ -1,7 +1,7 @@
 import 'package:edvoc_elearning/Core/colors.dart';
 import 'package:edvoc_elearning/Core/constants.dart';
 import 'package:edvoc_elearning/Core/style.dart';
-import 'package:edvoc_elearning/Ui/homeScreen/Tabview/home.dart';
+import 'package:edvoc_elearning/presentation/homeScreen/Tabview/home.dart';
 import 'package:flutter/material.dart';
 
 class WhyJoinContainer extends StatelessWidget {
